@@ -1,5 +1,6 @@
 # 파이게임 모듈을 불러 온다.
 import pygame
+import math
 
 # 초기화 시킨다.
 pygame.init()
@@ -33,8 +34,11 @@ while True:
 
     # - Set Player position and rotation
     position = pygame.mouse.get_pos()
-    angle = math.atan2(position[1]-(playerpostion[1]+32), position[0]-(playerpostion[0]+26))
-    playerrot  pygame.transform.rotate(player, 360-angle*57.29)
+    angle = math.atan2(position[1]-(playerpos[1]+32), position[0]-(playerpos[0]+26))
+    playerrot = pygame.transform.rotate(player, 360-angle*57.29)
+    playerpos1 = (playerpos[0]-playerrot.get_rect().width//2, playerpos[1]-playerrot.get_rect().height//2)
+    screen.blit(playerrot, playerpos1)
+
     # 화면을 다시 그린다.
     pygame.display.flip()
 

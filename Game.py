@@ -12,7 +12,8 @@ player = pygame.image.load("Shoot_Game/resources/images/dude.png")
 grass = pygame.image.load("Shoot_Game/resources/images/grass.png")
 castle = pygame.image.load("Shoot_Game/resources/images/castle.png")
 
-
+keys = [False, False, False, False]
+playerpos = [100,100]
 # 계속 화면이 보이도록 한다.
 while True:
     # 화면을 깨끗하게 한다.
@@ -27,7 +28,8 @@ while True:
     screen.blit(castle, (0,135))
     screen.blit(castle, (0,240))
     screen.blit(castle, (0,345))
-    screen.blit(player, (100,100))
+
+    screen.blit(player, (player,playerpos))
 
     # 화면을 다시 그린다.
     pygame.display.flip()
@@ -37,3 +39,32 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit(0)
+        if event.type == pygame.KEYDOWN
+            if  event.key == pygame.K_w:
+                keys[0] = True
+            elif event.key == pygame.K_a:
+                keys[1] = True
+            elif event.key == pygame.K_s:
+                keys[2] = True
+            elif event.key == pygame.K_d:
+                keys[3] = True
+
+         if event.type == pygame.KEYUP
+            if  event.key == pygame.K_w:
+                keys[0] = False
+            elif event.key == pygame.K_a:
+                keys[1] = False
+            elif event.key == pygame.K_s:
+                keys[2] = False
+            elif event.key == pygame.K_d:
+                keys[3] = False
+        
+        #  Move Player
+        if keys[0]:
+            playerpos[1] = playerpos[1] - 5
+        elif keys[2]:
+            playerpos[1] = playerpos[1] + 5
+        elif keys[1]:
+            playerpos[0] = playerpos[0] + 5
+        elif keys[3]:
+            playerpos[0] = playerpos[0] + 5

@@ -12,6 +12,7 @@ screen = pygame.display.set_mode((width, height))
 player = pygame.image.load("Shoot_Game/resources/images/dude.png")
 grass = pygame.image.load("Shoot_Game/resources/images/grass.png")
 castle = pygame.image.load("Shoot_Game/resources/images/castle.png")
+arrow = pygame.image.load("Shoot_Game/resources/images/bullet.png")
 
 keys = [False, False, False, False]
 playerpos = [100,100]
@@ -38,6 +39,19 @@ while True:
     playerrot = pygame.transform.rotate(player, 360-angle*57.29)
     playerpos1 = (playerpos[0]-playerrot.get_rect().width//2, playerpos[1]-playerrot.get_rect().height//2)
     screen.blit(playerrot, playerpos1)
+
+    # Draw arrows
+    for bullet in arrows:
+        index=0
+        velx = math.cos(bullet[0])*10
+        vely = math.sin(bullet[0]*10)
+        bullet[1] = bullet[1]+velx
+        bullet[2] = bullet[2]+velx
+        if bullet[1]<-64 or bullet[1]>640 or bullet[2]<64 or bullet[2]>480:
+        index = index+1
+        for prozectile in arrows:
+            arrow1 = pygame.transform.rotate(arrow, 360-prozectile[0]*57.29)
+            screen.blit(arrow1, (projectile[1], prozectile[2]))
 
     # 화면을 다시 그린다.
     pygame.display.flip()
@@ -66,6 +80,12 @@ while True:
                 keys[2] = False
             elif event.key == pygame.K_d:
                 keys[3] = False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            position = pygame.mouse.get_pos()
+            acc[1] = acc[1]+1
+            arrows.append()
+            arrows.append([math.atan2(position[1]-(playerpos1[1]+32), position[0]-(playerpos1[0]+26), playerpos1[1]+32
 
         #  Move Player
         if keys[0]:
